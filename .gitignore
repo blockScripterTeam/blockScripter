@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+pnpm-lock.yaml
+src-tauri/Cargo.lock
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
