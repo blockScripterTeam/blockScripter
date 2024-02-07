@@ -1,4 +1,4 @@
-name: Build Dev Versions on Pr or Pull in dev branch
+name: Auto Build Artifacts
 on:
   push:
     branches: [ "master" ]
