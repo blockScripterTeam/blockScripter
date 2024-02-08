@@ -52,7 +52,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: TMSL-dev-windows
+          name: BlockScripter-autobuild-windows
           path: src-tauri/target/release/*.exe
 
 
@@ -60,7 +60,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: TMSL-dev-macos
+          name: BlockScripter-autobuild-macos
           path: src-tauri/target/release/bundle/dmg/*.dmg
 
 
@@ -68,5 +68,5 @@ jobs:
         if: matrix.platform == 'ubuntu-20.04'
         uses: actions/upload-artifact@v3
         with:
-          name: TMSL-dev-linux
+          name: BlockScripter-autobuild-linux
           path: src-tauri/target/release/bundle/
