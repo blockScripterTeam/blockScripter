@@ -1,63 +1,21 @@
 <script>
-import Blockly from 'blockly'
+import Notice from './components/notice.vue'
+import InjectBlockly from './components/injectBlockly.vue'
+import Menu from './components/menu.vue'
 export default {
-    data() {
-        return {
-            workspace: null,
-            toolbox: {
-                "kind": "flyoutToolbox",
-                "contents": [
-                    {
-                        "kind": "block",
-                        "type": "controls_if"
-                    },
-                    {
-                        "kind": "block",
-                        "type": "controls_repeat_ext"
-                    },
-                    {
-                        "kind": "block",
-                        "type": "logic_compare"
-                    },
-                    {
-                        "kind": "block",
-                        "type": "math_number"
-                    },
-                    {
-                        "kind": "block",
-                        "type": "math_arithmetic"
-                    },
-                    {
-                        "kind": "block",
-                        "type": "text"
-                    },
-                    {
-                        "kind": "block",
-                        "type": "text_print"
-                    },
-                ]
-            },
-            code: null
-        }
-    },
-    methods: {
-        initBlockly(){
-            this.workspace = Blockly.inject('blocklyDiv', {toolbox: this.toolbox});
-        }
-    },
-    mounted() {
-        initBlockly();
+    components: {
+        Notice,
+        InjectBlockly,
+        Menu
     }
 }
 </script>
 
 <template>
-    <div id="blocklyDiv" class="blocklyDiv"></div>
+    <!-- <InjectBlockly/> -->
+    <!-- <Notice/> -->
+    <Menu/>
 </template>
 
 <style scoped>
-#blocklyDiv {
-    height: 480px;
-    width: 600px;
-}
 </style>
