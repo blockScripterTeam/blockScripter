@@ -65,6 +65,7 @@ body {
   letter-spacing: 4px;
   background: linear-gradient(to right, gold, silver, royalblue, cyan, magenta);
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
   background-size: 600% 100%;
   animation: gradientAnimation 6s infinite alternate;
@@ -72,6 +73,7 @@ body {
   /* 调整 BlockScripter 的外边距 */
   user-select: none;
   -webkit-appearance: none;
+  appearance: none;
   -moz-appearance: none;
   -ms-user-select: none;
 }
@@ -97,6 +99,7 @@ body {
   border-radius: 20px;
   user-select: none;
   -webkit-appearance: none;
+  appearance: none;
   -moz-appearance: none;
   -ms-user-select: none;
   outline: none;
@@ -142,6 +145,8 @@ body {
   user-select: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
   -ms-user-select: none;
   outline: none;
   /* 取消按钮的轮廓效果 */
@@ -162,6 +167,8 @@ body {
   user-select: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
   -ms-user-select: none;
   outline: none;
   background-color: transparent;
