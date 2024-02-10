@@ -1,3 +1,3 @@
-pub fn getMinecraftVersions() -> Box(String){
+pub fn getMinecraftVersions() -> Box<String>{
     
 }
