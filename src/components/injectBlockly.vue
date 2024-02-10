@@ -1,42 +1,27 @@
 <script>
 import Blockly from 'blockly'
 import * as Ch from 'blockly/msg/zh-hans'
-import {javascriptGenerator} from 'blockly/javascript';
+import { javascriptGenerator } from 'blockly/javascript';
+import axios from 'axios';
+
 Blockly.setLocale(Ch)
+
 export default {
     data() {
         return {
             workspace: null,
-            toolboxXml:
-                `
-<xml id="toolbox" style="display: none">
-    <category name="逻辑" categorystyle="logic_category">
-        <block type="controls_if"></block>
-        <block type="logic_compare"></block>
-        <block type="logic_operation"></block>
-        <block type="logic_negate"></block>
-        <block type="logic_boolean"></block>
-    </category>
-    <category name="循环" categorystyle="loop_category">
-        <block type="controls_repeat_ext">
-            <value name="TIMES">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="controls_flow_statements"></block>
-    </category>
-</xml>
-            `
+            toolboxXml: ''
         }
     },
-    mounted() {
+    async mounted() {
+        const response = await axios.get('/assets/toolbox.xml');
+        this.toolboxXml = response.data;
+
         this.workspace = Blockly.inject(
             'blocklyDiv',
             { toolbox: this.toolboxXml }
-        )
-        this.workspace.addChangeListener(this.updateCode)
+        );
+        this.workspace.addChangeListener(this.updateCode);
     },
     methods: {
         updateCode(event) {
@@ -44,7 +29,8 @@ export default {
             document.getElementById('codespace').value = code;
         }
     }
-}    
+}
+
 </script>
 
 <template>
@@ -60,7 +46,8 @@ export default {
     left: 0px;
     right: 30%;
 }
-#codespace{
+
+#codespace {
     position: absolute;
     top: 5%;
     bottom: 0px;
