@@ -1,109 +1,169 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+@keyframes flashAnimation {
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  25%,
+  75% {
+    opacity: 0;
+  }
 }
 
-.container {
+.flash {
+  animation: flashAnimation 0.065s ease-in-out 2;
+  /* 2表示执行两次动画 */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 0;
+  }
+
+  20% {
+    background-position: 0 0;
+  }
+
+  80% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+html {
+  height: 100%;
+  background: linear-gradient(to bottom, #C0C0C0, #FFFFFF);
+  /* 从深紫到深蓝的渐变 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* 设置字体 */
+}
+
+body {
   margin: 0;
-  padding-top: 10vh;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  height: 100vh;
+  position: relative;
+  /* 为了定位透明按钮 */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
-}
-
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
-
-.row {
+#app {
+  flex-grow: 1;
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+#app h1 {
+  font-size: 4em;
+  font-weight: bold;
+  letter-spacing: 4px;
+  background: linear-gradient(to right, gold, silver, royalblue, cyan, magenta);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 600% 100%;
+  animation: gradientAnimation 6s infinite alternate;
+  margin: 20px;
+  /* 调整 BlockScripter 的外边距 */
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-user-select: none;
 }
 
-a:hover {
-  color: #535bf2;
+#button-wrapper {
+  margin-top: 10px;
+  /* 微调按钮位置，可以根据需要调整这个值 */
+  margin-bottom: -150px;
+  /* 添加底边距 */
+  margin-left: 45px;
 }
 
-h1 {
-  text-align: center;
-}
-
-input,
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-button {
+#button {
+  width: 80px;
+  /* 设置按钮宽度 */
+  height: 80px;
+  /* 设置按钮高度 */
+  border: none;
+  /* 移除按钮边框 */
+  padding: 0;
+  /* 移除按钮内边距 */
   cursor: pointer;
-}
-
-button:hover {
-  border-color: #396cd8;
-}
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
-}
-
-input,
-button {
+  border-radius: 20px;
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-user-select: none;
   outline: none;
+  /* 取消按钮的轮廓效果 */
+  caret-color: transparent;
+  /* 取消光标颜色，使其透明 */
 }
 
-#greet-input {
-  margin-right: 5px;
+#image-wrapper {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  /* 添加图片容器的阴影效果 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
+#image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
-  a:hover {
-    color: #24c8db;
-  }
+#small-text {
+  position: relative;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 475px;
+  margin-left: 30px;
+  font-size: 1em;
+  color: #333;
+  /* 设置小字颜色 */
+  caret-color: transparent;
+  /* 取消光标颜色，使其透明 */
+}
 
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
-  }
-  button:active {
-    background-color: #0f0f0f69;
-  }
+#text-change-button {
+  position: absolute;
+  width: 40%;
+  height: 1em;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 2;
+  margin-left: 27px;
+  margin-top: 112px;
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-user-select: none;
+  outline: none;
+  /* 取消按钮的轮廓效果 */
+  background-color: transparent;
+  /* 设置按钮颜色为透明 */
+  caret-color: transparent;
+  /* 取消光标颜色，使其透明 */
+}
+
+#background-change-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 2;
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-user-select: none;
+  outline: none;
+  background-color: transparent;
+  caret-color: transparent;
 }
