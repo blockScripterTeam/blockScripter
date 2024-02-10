@@ -1,26 +1,27 @@
 <script>
 import Blockly from 'blockly'
 import * as Ch from 'blockly/msg/zh-hans'
-import {javascriptGenerator} from 'blockly/javascript';
+import { javascriptGenerator } from 'blockly/javascript';
 import axios from 'axios';
 
 Blockly.setLocale(Ch)
-
-const toolboxXml = await axios.get('/assets/toolbox.xml')
 
 export default {
     data() {
         return {
             workspace: null,
-            toolboxXml: toolboxXml.data
+            toolboxXml: ''
         }
     },
-    mounted() {
+    async mounted() {
+        const response = await axios.get('/assets/toolbox.xml');
+        this.toolboxXml = response.data;
+
         this.workspace = Blockly.inject(
             'blocklyDiv',
             { toolbox: this.toolboxXml }
-        )
-        this.workspace.addChangeListener(this.updateCode)
+        );
+        this.workspace.addChangeListener(this.updateCode);
     },
     methods: {
         updateCode(event) {
@@ -28,7 +29,8 @@ export default {
             document.getElementById('codespace').value = code;
         }
     }
-}    
+}
+
 </script>
 
 <template>
@@ -44,7 +46,8 @@ export default {
     left: 0px;
     right: 30%;
 }
-#codespace{
+
+#codespace {
     position: absolute;
     top: 5%;
     bottom: 0px;
