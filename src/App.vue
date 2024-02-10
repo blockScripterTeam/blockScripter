@@ -92,7 +92,7 @@ export default {
     <div id="button-wrapper">
         <!-- 添加一个链接元素，包含按钮图片 -->
         <a href="https://minecraft.com">
-            <img id="button" src="E:\浏览器下载\程编.jpg" alt="Button Image">
+            <img id="button" src="" alt="Button Image">
         </a>
     </div>
     <!-- 添加小字 -->
