@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": ".",
+    "productName": "Block Scripter",
     "version": "0.0.0"
   },
   "tauri": {
