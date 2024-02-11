@@ -1,40 +1,31 @@
-<script setup>
+<script setup lang="js">
+import { ref } from 'vue'
 let isChangingText = false; // 标志变量
+const textClass = ref(['flash'])
+let clickCount = 0;
+// 生成2到5之间的随机整数
+const randomClicks = Math.floor(Math.random() * 3) + 3;
+function handleClick() {
+    clickCount++;
+    console.log(`点击次数：${clickCount}/${randomClicks}`);
+    if (!clickCount < randomClicks){
+        // 重置状态，并执行文本切换
+        isChangingText = false;
+        clickCount = 0;
+        changeText();
+    }
+}
 function handleButtonClick() {
     if (isChangingText) {
         return; // 如果正在切换文本，直接返回
     }
     isChangingText = true; // 设置为正在切换文本状态
-    // 生成2到5之间的随机整数
-    const randomClicks = Math.floor(Math.random() * 3) + 3;
+
     // 小字文本闪烁
-    const smallText = document.getElementById('small-text');
-    smallText.classList.add('flash');
     setTimeout(() => {
-        smallText.classList.remove('flash');
+        textClass.value = []
     }, 200);
-    let clickCount = 0;
-    function handleClick() {
-        clickCount++;
-        console.log(`点击次数：${clickCount}/${randomClicks}`);
-        if (clickCount < randomClicks) {
-            // 点击次数未达到要求，继续监听点击事件
-            textChangeButton.removeEventListener('click', handleClick);
-            textChangeButton.addEventListener('click', handleClick);
-        } else {
-            // 重置状态，并执行文本切换
-            isChangingText = false;
-            clickCount = 0;
-            changeText();
-        }
-    }
-    // 初始绑定点击事件
-    textChangeButton.removeEventListener('click', handleClick);
-    textChangeButton.addEventListener('click', handleClick);
 }
-// 添加点击事件监听器
-const textChangeButton = document.getElementById("text-change-button");
-textChangeButton.addEventListener("click", handleButtonClick);
 // 定义文本库数组 严格限制在20字以内（包括20字）
 const textLibrary = [
     "欢迎来到BlockScripter",
@@ -53,6 +44,7 @@ const textLibrary = [
     "人老也是啥都不懂了",
     "dsb?",
 ];
+let textContent = ref('')
 // 随机切换文本函数
 function changeText() {
     // 生成一个 0 到 9 的随机整数
@@ -60,8 +52,9 @@ function changeText() {
     // 获取随机文本
     const randomText = textLibrary[randomIndex];
     // 将小字内容替换为随机文本
-    document.getElementById("small-text").textContent = randomText;
+    textContent.value = randomText;
 }
+changeText(); // 初始化时切换一次文本
 let isBackgroundWhite = false; // 初始状态为非白色
 
 function toggleBackground() {
@@ -71,7 +64,7 @@ function toggleBackground() {
 }
 </script>
 
-<script>
+<script lang="js">
 import Notice from './components/notice.vue'
 import InjectBlockly from './components/injectBlockly.vue'
 import Menu from './components/menu.vue'
@@ -96,10 +89,10 @@ export default {
         </a>
     </div>
     <!-- 添加小字 -->
-    <div id="small-text" onclick="changeText()">欢迎来到BlockScripter</div>
+    <div id="small-text" @click="changeText()" :class="textClass">{{ textContent }}</div>
     <!-- 添加透明按钮 -->
-    <div id="text-change-button"></div>
-    <div id="background-change-button" onclick="toggleBackground()"></div>
+    <div id="text-change-button" @click="handleClick();handleButtonClick()"></div>
+    <div id="background-change-button" @click="toggleBackground()"></div>
     <!-- <InjectBlockly/> -->
     <!-- <Notice/> -->
     <Menu />
