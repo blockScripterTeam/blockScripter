@@ -1,4 +1,7 @@
 <script setup lang="js">
+import Notice from '../components/NoticeComponent.vue'
+import InjectBlockly from '../components/InjectBlocklyComponent.vue'
+import Menu from '../components/MenuComponent.vue'
 import { ref } from 'vue'
 let isChangingText = false; // 标志变量
 const textClass = ref(['flash'])
@@ -61,19 +64,6 @@ function toggleBackground() {
     const body = document.body;
     isBackgroundWhite = !isBackgroundWhite; // 取反
     body.style.background = isBackgroundWhite ? '#FFFFFF' : 'linear-gradient(to bottom, #C0C0C0, #FFFFFF)';
-}
-</script>
-
-<script setup>
-import Notice from '../components/NoticeComponent.vue'
-import InjectBlockly from '../components/InjectBlocklyComponent.vue'
-import Menu from '../components/MenuComponent.vue'
-export default {
-    components: {
-        Notice,
-        InjectBlockly,
-        Menu
-    }
 }
 </script>
 
