@@ -1,8 +1,10 @@
-<script>
+<script lang="js" setup>
+import { ref } from 'vue'
+let visible = ref(true)
 </script>
 
 <template>
-    <div id="side-menu" class="side-menu">
+    <div id="side-menu" class="side-menu" v-show="visible">
         <ul>
             <li class="menu-item">
                 <span class="menu-text">首页</span>
@@ -23,7 +25,7 @@
                 <span class="menu-text">云部署</span>
             </li>
         </ul>
-        <li id="toogle" class="menu-item toogle">
+        <li id="toogle" class="menu-item toogle" @click="visible = false">
             <span class="menu-text">隐藏</span>
         </li>
     </div>
