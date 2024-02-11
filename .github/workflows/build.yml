@@ -1,9 +1,9 @@
 name: Auto Build Artifacts
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev", "refactor/boxy" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "dev", "refactor/boxy" ]
   workflow_dispatch:
 
 jobs:
