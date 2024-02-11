@@ -54,6 +54,7 @@ function changeText() {
     // 将小字内容替换为随机文本
     textContent.value = randomText;
 }
+changeText(); // 初始化时切换一次文本
 let isBackgroundWhite = false; // 初始状态为非白色
 
 function toggleBackground() {
