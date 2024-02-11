@@ -1,9 +1,9 @@
-name: Auto Build Snapshot Artifacts
+name: Auto Build Dev Artifacts
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "dev" ]
   workflow_dispatch:
 
 jobs:
@@ -47,7 +47,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: BlockScripter-SNAPSHOT-windows
+          name: BlockScripter-DEV-windows
           path: src-tauri/target/release/*.exe
 
 
@@ -55,7 +55,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: BlockScripter-SNAPSHOT-macos
+          name: BlockScripter-DEV-macos
           path: src-tauri/target/release/bundle/dmg/*.dmg
 
 
@@ -63,5 +63,5 @@ jobs:
         if: matrix.platform == 'ubuntu-20.04'
         uses: actions/upload-artifact@v4
         with:
-          name: BlockScripter-SNAPSHOT-linux
+          name: BlockScripter-DEV-linux
           path: src-tauri/target/release/bundle/deb/*.deb
