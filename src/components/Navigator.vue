@@ -21,10 +21,11 @@
 
 <script setup>
 import Blockly from 'blockly'
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 
 import { useStore } from '../store/store'
 import Settings from './Settings.vue'
+import {os} from "@tauri-apps/api";
 
 const visible = ref()
 const modal = ref()
@@ -79,6 +80,12 @@ function handleAboutClick() {
   window.open('https://www.yuque.com/hzsn/boxy')
   visible.value = false
 }
+
+// WindowButtons
+onMounted(async () => {
+  document.getElementById("logo").style.padding = await os.type() === "Darwin" ? "27px 17px 12px 17px" : "37px 27px 12px 27px";
+});
+
 </script>
 
 <style>
@@ -90,7 +97,6 @@ function handleAboutClick() {
 
   width: 36px;
   height: 36px;
-  padding: 12px;
 
   background-color: var(--color-bg-2);
 }

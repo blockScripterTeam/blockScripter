@@ -5,6 +5,7 @@ import Blockly from 'blockly'
 import { onMounted } from 'vue'
 
 import superellipse from '../assets/superellipse.svg'
+import {os} from "@tauri-apps/api";
 
 // https://blocklycodelabs.dev/codelabs/custom-toolbox/index.html?index=..%2F..index#0
 
@@ -139,13 +140,13 @@ onMounted(() => {
 
   useMutationObserver(
     flyoutElement,
-    () => {
+    async () => {
       const flyout = cookies.get('flyout')
       const flyoutElementWidth = Math.max(parseInt(flyoutElement.getAttribute('width')), 320)
       const displayBlock = flyoutElement.style.display === 'block'
       flyoutElement.style.width = flyout === 'fixed' || !displayBlock ? '320px' : `${flyoutElementWidth}px`
       flyoutElement.style.transform = displayBlock
-        ? 'translate(60px, 0px)'
+          ? 'translate(' + await os.type() === "Darwin" ? '70' : '100' + 'px, 0px)' // WindowButtons
         : `translate(${60 - (flyout === 'full' ? flyoutElementWidth : 320)}px, 0px)`
     },
     { attributeFilter: ['style'] }
@@ -163,15 +164,33 @@ onMounted(() => {
     }
   })
 })
+
+// WindowButtons
+onMounted(async () => {
+  const isMacOS = false
+  const style = document.createElement("style");
+  style.lang = "less";
+  document.getElementById("app").appendChild(style);
+  style.innerHTML = `
+    div.injectionDiv {
+      > div.blocklyToolboxDiv {
+        top: ${isMacOS ? '70' : '90'}px;
+        width: ${isMacOS ? '70' : '90'}px;
+      }
+      > svg.blocklyFlyout {
+        width: ${isMacOS ? '330' : '350'}px;
+        min-width: ${isMacOS ? '330' : '350'}px;
+      }
+    }
+  `
+});
 </script>
 
 <style lang="less">
 div.injectionDiv {
   > div.blocklyToolboxDiv {
     z-index: 4;
-    top: 60px;
 
-    width: 60px;
     height: calc(100% - 60px) !important;
     padding: 0;
 
@@ -217,9 +236,7 @@ div.injectionDiv {
     overflow: hidden;
     display: block !important;
 
-    width: 320px;
     height: 100%;
-    min-width: 320px;
 
     background: var(--color-bg-2);
     border-right: 1px solid var(--color-border);
