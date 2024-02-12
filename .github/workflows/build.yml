@@ -1,9 +1,9 @@
-name: Auto Build Artifacts
+name: Auto Build Artifacts for Refactor/Boxy
 on:
   push:
-    branches: [ "master", "dev", "refactor/boxy" ]
+    branches: [ "refactor/boxy" ]
   pull_request:
-    branches: [ "master", "dev", "refactor/boxy" ]
+    branches: [ "refactor/boxy" ]
   workflow_dispatch:
 
 jobs:
@@ -39,11 +39,11 @@ jobs:
         with:
           node-version: 'lts/*'
 
-      - name: Install PNPM
-        run: npm i -g pnpm
+      - name: Install YARN
+        run: npm i -g yarn
 
       - name: Install frontend dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: yarn --no-frozen-lockfile
 
       - name: Build the app
         uses: tauri-apps/tauri-action@v0

@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": ".",
-    "version": "0.0.0"
+    "productName": "BlockScripter",
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -19,11 +19,18 @@
     },
     "windows": [
       {
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
         "fullscreen": false,
+        "height": 800,
+        "width": 1280,
+        "minHeight": 700,
+        "minWidth": 1100,
         "resizable": true,
-        "title": "block-scripter",
-        "width": 800,
-        "height": 600
+        "title": "BlockScripter",
+        "visible": true,
+        "decorations": false,
+        "transparent": true
       }
     ],
     "security": {
