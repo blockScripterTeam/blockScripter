@@ -5,7 +5,7 @@ import Blockly from 'blockly'
 import { onMounted } from 'vue'
 
 import superellipse from '../assets/superellipse.svg'
-import {os} from "@tauri-apps/api";
+import { os } from "@tauri-apps/api";
 
 // https://blocklycodelabs.dev/codelabs/custom-toolbox/index.html?index=..%2F..index#0
 
@@ -145,9 +145,11 @@ onMounted(() => {
       const flyoutElementWidth = Math.max(parseInt(flyoutElement.getAttribute('width')), 320)
       const displayBlock = flyoutElement.style.display === 'block'
       flyoutElement.style.width = flyout === 'fixed' || !displayBlock ? '320px' : `${flyoutElementWidth}px`
+      let translateX = await os.type() === "Darwin" ? '70' : '100'
+      let flyoutTrans = (flyout === 'full' ? flyoutElementWidth : 320)
       flyoutElement.style.transform = displayBlock
-          ? 'translate(' + await os.type() === "Darwin" ? '70' : '100' + 'px, 0px)' // WindowButtons
-        : `translate(${60 - (flyout === 'full' ? flyoutElementWidth : 320)}px, 0px)`
+        ? 'translate(' + translateX + 'px, 0px)' // WindowButtons
+        : `translate(${60 - flyoutTrans}px, 0px)`
     },
     { attributeFilter: ['style'] }
   )
@@ -188,7 +190,7 @@ onMounted(async () => {
 
 <style lang="less">
 div.injectionDiv {
-  > div.blocklyToolboxDiv {
+  >div.blocklyToolboxDiv {
     z-index: 4;
 
     height: calc(100% - 60px) !important;
@@ -196,20 +198,20 @@ div.injectionDiv {
 
     background: var(--color-bg-2);
 
-    > div > div {
-      > div.blocklyTreeRow {
+    >div>div {
+      >div.blocklyTreeRow {
         height: initial;
         margin: 0 4px;
         padding: 0 !important;
         border-radius: 4px;
 
-        > div.blocklyTreeRowContentContainer {
+        >div.blocklyTreeRowContentContainer {
           display: flex;
           flex-direction: column;
           align-items: center;
           padding: 11px 0 6px;
 
-          > span.blocklyTreeLabel {
+          >span.blocklyTreeLabel {
             padding: 3px 0;
 
             font: 13px sans-serif !important;
@@ -221,14 +223,14 @@ div.injectionDiv {
       }
 
       @media (any-hover: hover) {
-        > div.blocklyTreeRow:not(.blocklyTreeSelected):hover {
+        >div.blocklyTreeRow:not(.blocklyTreeSelected):hover {
           background-color: rgb(var(--primary-1));
         }
       }
     }
   }
 
-  > svg.blocklyFlyout {
+  >svg.blocklyFlyout {
     position: absolute;
     z-index: 3;
     transform: translate(-260px, 0);
@@ -246,30 +248,30 @@ div.injectionDiv {
       min-width cubic-bezier(0.34, 0.69, 0.1, 1) 300ms,
       transform cubic-bezier(0.34, 0.69, 0.1, 1) 300ms;
 
-    > path.blocklyFlyoutBackground {
+    >path.blocklyFlyoutBackground {
       fill: var(--color-bg-2);
       fill-opacity: 0;
     }
 
-    > g > g > g {
+    >g>g>g {
       fill: rgb(var(--primary-6));
       transition: fill cubic-bezier(0.34, 0.69, 0.1, 1) 300ms;
 
-      > rect.blocklyFlyoutButtonShadow {
+      >rect.blocklyFlyoutButtonShadow {
         display: none;
       }
     }
 
-    > g > g > g:hover {
+    >g>g>g:hover {
       fill: rgb(var(--primary-5));
     }
 
-    > g > g > g:active {
+    >g>g>g:active {
       fill: rgb(var(--primary-7));
     }
   }
 
-  > svg.blocklyScrollbarVertical.blocklyFlyoutScrollbar {
+  >svg.blocklyScrollbarVertical.blocklyFlyoutScrollbar {
     display: none;
   }
 }

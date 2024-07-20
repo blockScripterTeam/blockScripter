@@ -50,9 +50,6 @@ class CustomConstantsProvider extends Blockly.zelos.ConstantProvider {
 }
 
 class CustomRenderer extends Blockly.zelos.Renderer {
-  constructor(name) {
-    super(name)
-  }
   makeConstants_() {
     return new CustomConstantsProvider()
   }
